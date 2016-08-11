@@ -9,6 +9,7 @@ pipeline:
   - nlp
   - geocode
   - persisttofile
+  
 
 elasticsearch:
   host: localhost
@@ -18,8 +19,8 @@ elasticsearch:
     name: nets-raw-article
     doctype: nets-article
   - type: enhanced-article
-    name: nets-event
-    doctype: nets-event
+    name: nets-enhanced-document
+    doctype: enhanced-document
 
 logging:
     format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
