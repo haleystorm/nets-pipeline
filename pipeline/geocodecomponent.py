@@ -35,7 +35,7 @@ class geocoder(BaseComponent):
                 geocode['name'] = anno['features']['place']['placeName']
                 geocode['countryCode'] = anno['features']['place']['countryCode']
                 geocode['lat'] = anno['features']['place']['latitude']
-                geocode['lon'] = anno['features']['place']['latitude']
+                geocode['lon'] = anno['features']['place']['longitude']
                 geocode['adm1'] = anno['features']['place']['admin1']
                 geocode['adm2'] = anno['features']['place']['admin2']
                 article['geocode'].append(geocode)
