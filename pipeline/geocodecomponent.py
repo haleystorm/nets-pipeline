@@ -7,26 +7,24 @@ class geocoder(BaseComponent):
 
 
     def initialize(self, parameters):
-        self.dummydata = geocodes = [
-            {'name': 'Lima', 'lat': 32.345, 'lon': 45.32, 'adm1' : 'PE15', 'adm2' : None},
-            {'name': 'Stuebenville', 'lat': 32.345, 'lon': 45.32, 'adm1': 'US21', 'adm2': 'US21.0007'}
-        ]
         self.logger = logging.getLogger('scraper_log')
+        self.url = parameters['opensextant']['base'] + '/extract/geo/json'
 
     def geoparse(self, content):
         try:
-            url = 'http://localhost:8182/opensextant/extract/geo/json'
             files = {'infile': ('content.txt', content)}
-            response = requests.post(url, files=files)
+            response = requests.post(self.url, files=files)
             return response.json()
         except Exception, e:
             print 'There was an error. Check the log file for more information.'
-            self.logger.warning('Problem requesting url: {}. {}'.format(url, e))
+            self.logger.warning('Problem requesting url: {}. {}'.format(self.url, e))
+        return {'annoList': []}
 
     def process(self, articles):
 
         for article in articles:
             article['geocode'] = []
+
             geocode_doc = self.geoparse(article['content'])
 
             for anno in geocode_doc['annoList']:
