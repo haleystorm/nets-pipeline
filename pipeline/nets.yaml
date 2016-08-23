@@ -8,6 +8,7 @@ pipeline:
   components:
   - nlp
   - geocode
+  - geoparse
   - persisttofile
   
 
@@ -24,6 +25,9 @@ elasticsearch:
 
 opensextant:
   base: http://localhost:8182/opensextant
+
+clavin:
+  base: https://lew.geointservices.io/v1/geo/getLocationsExpanded
 
 logging:
     format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'

@@ -3,6 +3,7 @@ import json
 from elasticsearch import Elasticsearch,ElasticsearchException
 from nlpcomponent import nlp
 from geocodecomponent import geocoder
+from geoparsecomponent import geoparser
 from os.path import join
 
 
@@ -28,6 +29,7 @@ class Pipeline:
             component = None
             if name == 'nlp': component = nlp(parameters)
             if name == 'geocode': component = geocoder(parameters)
+            if name == 'geoparse': component = geoparser(parameters)
             self.components.append( { 'name' : name, 'component' : component})
             self.logger.info("pipeline component: %s" % name)
 
