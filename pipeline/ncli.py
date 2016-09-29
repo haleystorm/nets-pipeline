@@ -74,7 +74,7 @@ class Ncli:
         self.eventpipeline = Pipeline(self.parameters)
         es_index, es_doctype = self.indexinfo('raw-article')
         self.logger.info("Send %s articles through the pipeline" % n)
-        query =  '{"query": { "bool": { "must": { "match": { "status" : 0 }}}}}'
+        query =  '{"query": { "filtered": { "filter": { "terms": { "_id" : ["AVXHhLG4IMD3Ugp9N3aW", "AVXHhLRpIMD3Ugp9N3ad", "AVXHhNU-IMD3Ugp9N3cA", "AVXHhSrSIMD3Ugp9N3gA", "AVXHhThlIMD3Ugp9N3gt", "AVXHhU2IIMD3Ugp9N3ht", "AVXHhUsQIMD3Ugp9N3hl", "AVXHhW3gIMD3Ugp9N3jQ", "AVXHhW5iIMD3Ugp9N3jS", "AVYh0fe-IMD3Ugp9PHW6" ] }}}}}'
         result = self.es.search(index=es_index,doc_type=es_doctype,size=n, body=query)
         articles = result['hits']['hits']
 

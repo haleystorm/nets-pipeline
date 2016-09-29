@@ -1,14 +1,17 @@
 directories:
   articles: /apps/nets-pipeline-home/data
-  persist: /tmp/
+  persist: /Users/haley/Projects/RadiantBlue/nets/nets-documents/
 
 pipeline:
   delay: 4
   batchsize: 2
   components:
   - nlp
-  - geocode
-  - geoparse
+  - clavin-geocode
+  - nominatim-geocode
+  - mapzen-geocode
+  - ost-geoparse
+  - clavin-geoparse
   - persisttofile
   
 
@@ -24,10 +27,17 @@ elasticsearch:
     doctype: enhanced-document
 
 opensextant:
-  base: http://localhost:8182/opensextant
+  geoparse: http://localhost:8182/opensextant/extract/geo/json
 
 clavin:
-  base: https://lew.geointservices.io/v1/geo/getLocationsExpanded
+  geocode: https://lew.geointservices.io/v1/geo/getLocationsExpanded
+  geoparse: http://localhost:9090/api/v0/geotag
+  
+nominatim:
+  geocode: http://nominatim.openstreetmap.org/search
+
+mapzen:
+  geocode: https://search.mapzen.com/v1/search
 
 logging:
     format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'

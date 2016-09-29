@@ -3,12 +3,12 @@ import requests
 from basecomponent import BaseComponent
 
 
-class geoparser(BaseComponent):
+class ostGeoparser(BaseComponent):
 
 
     def initialize(self, parameters):
-        self.logger = logging.getLogger('scraper_log')
-        self.url = parameters['opensextant']['base'] + '/extract/geo/json'
+        self.logger = logging.getLogger('NETS')
+        self.url = parameters['opensextant']['geoparse']
 
     def geoparse(self, content):
         try:
@@ -23,7 +23,8 @@ class geoparser(BaseComponent):
     def process(self, articles):
 
         for article in articles:
-            article['geoparse'] = []
+            if 'geoparse' not in article:
+                article['geoparse'] = []
 
             geocode_doc = self.geoparse(article['content'])
 

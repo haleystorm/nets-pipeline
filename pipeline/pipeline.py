@@ -2,8 +2,11 @@ import logging
 import json
 from elasticsearch import Elasticsearch,ElasticsearchException
 from nlpcomponent import nlp
-from geocodecomponent import geocoder
-from geoparsecomponent import geoparser
+from clavingeocodecomponent import clavinGeocoder
+from nominatimgeocodecomponent import nominatimGeocoder
+from mapzengeocodecomponent import mapzenGeocoder
+from ostgeoparsecomponent import ostGeoparser
+from clavingeoparsecomponent import clavinGeoparser
 from os.path import join
 
 
@@ -28,8 +31,11 @@ class Pipeline:
         for name in parameters['pipeline']['components']:
             component = None
             if name == 'nlp': component = nlp(parameters)
-            if name == 'geocode': component = geocoder(parameters)
-            if name == 'geoparse': component = geoparser(parameters)
+            if name == 'clavin-geocode': component = clavinGeocoder(parameters)
+            if name == 'nominatim-geocode': component = nominatimGeocoder(parameters)
+            if name == 'mapzen-geocode': component = mapzenGeocoder(parameters)
+            if name == 'ost-geoparse': component = ostGeoparser(parameters)
+            if name == 'clavin-geoparse': component = clavinGeoparser(parameters)
             self.components.append( { 'name' : name, 'component' : component})
             self.logger.info("pipeline component: %s" % name)
 

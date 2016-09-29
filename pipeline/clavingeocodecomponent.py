@@ -3,12 +3,12 @@ import requests
 from basecomponent import BaseComponent
 
 
-class geocoder(BaseComponent):
+class clavinGeocoder(BaseComponent):
 
 
     def initialize(self, parameters):
-        self.logger = logging.getLogger('scraper_log')
-        self.url = parameters['clavin']['base']
+        self.logger = logging.getLogger('NETS')
+        self.url = parameters['clavin']['geocode']
 
     def geocode(self, place):
         try:
@@ -32,7 +32,8 @@ class geocoder(BaseComponent):
     def process(self, articles):
 
         for article in articles:
-            article['geocode'] = []
+            if 'geocode' not in article:
+                article['geocode'] = []
             
             for place in article['places']:
                 # Take first hit returned
@@ -40,6 +41,7 @@ class geocoder(BaseComponent):
                 if geocode_doc:
                     geocode = { 'source': 'clavin' }
                     geocode['name'] = geocode_doc['asciiName']
+                    geocode['matchText'] = place
                     geocode['countryCode'] = geocode_doc['primaryCountryCode']
                     geocode['lat'] = geocode_doc['latitude']
                     geocode['lon'] = geocode_doc['longitude']
