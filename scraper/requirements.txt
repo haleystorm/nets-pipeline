@@ -11,7 +11,7 @@ jieba==0.32
 jmespath==0.9.0
 jusText==2.1.0
 lxml==3.3.0
-nltk==3.2.1
+nltk==3.4.5
 parsedatetime==2.1
 Pattern==2.6
 Pillow==2.3.0
