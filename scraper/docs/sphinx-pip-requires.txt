@@ -11,7 +11,7 @@ docutils==0.11
 goose-extractor==1.0.8
 jieba==0.32
 jusText==2.1.0
-lxml==3.3.0
+lxml==4.9.1
 nltk==2.0.4
 numpydoc==0.4
 pymongo==2.6.3
